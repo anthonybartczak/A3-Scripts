@@ -1,0 +1,13 @@
+_plane = createVehicle ["LIB_P47", getMarkerPos("plane"), [], 0, "FLY"];
+
+_pilotguy = [[26761.4,24593.4,0.000909805],independent, ["LIB_US_Pilot"],[],[],[],[],[],232] call BIS_fnc_spawnGroup;
+
+((units _pilotguy) select 0) moveInDriver _plane;
+
+_wpcas = _pilotguy addWaypoint [getMarkerPos("mkr1"), 0];
+
+_wpcas setWaypointBehaviour "SAFE";
+
+_wpcas setWaypointCombatMode "RED";
+
+_wpcas setWaypointCompletionRadius 1900;
