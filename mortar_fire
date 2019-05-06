@@ -1,0 +1,20 @@
+//null = ["marker",mortar1,"",5,10,200] execVM "mortar_fire.sqf";
+//this addeventhandler ["fired", {(_this select 0) setvehicleammo 1}];
+
+if (isServer) then {
+	_marker = _this select 0;
+	_gun = _this select 1;
+	_ammoType = _this select 2;
+	_b = _this select 3;
+	_frequency = _this select 4;
+	_radius = _this select 5;
+
+	if (_ammoType=="") then {_ammoType = getArtilleryAmmo [_gun] select 0;};
+	_center = getmarkerpos _marker;
+
+	for "_i" from 1 to _b do {
+		_pos = [(_center select 0) - _radius + (2 * random _radius),(_center select 1) - _radius + (2 * random _radius),0];
+		_gun doArtilleryFire [_pos, _ammoType, 1]; 
+		sleep _frequency;
+	};
+};
