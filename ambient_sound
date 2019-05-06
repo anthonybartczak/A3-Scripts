@@ -1,0 +1,24 @@
+//[]execVM "battlefield_ambient_sounds.sqf";
+//objective_pos_logic
+
+if (!isdedicated && hasInterface) then {
+[] spawn {
+waitUntil {!isNull player};
+waitUntil {player == player};
+private ["_allsounds","_source"];
+_allsounds = [];
+_source = objective_pos_logic;
+while {true} do {
+    private ["_sound","_sound1","_sound2","_maxtype"];
+    _allsounds = _allsounds - _allsounds;
+    _sound1 = format ["A3\Sounds_F\ambient\battlefield\battlefield_explosions%1.wss",ceil (random 5)];
+    _sound2 = format ["A3\Sounds_F\ambient\battlefield\battlefield_firefight%1.wss",ceil (random 4)];
+    _allsounds pushBack _sound1;
+    _allsounds pushBack _sound2;
+    _maxtype = (count _allsounds);
+    _sound = _allsounds select (floor random _maxtype);
+    playsound3d [_sound,_source,false,getPosasl _source,12,1,8000];        
+    sleep (1 + random 29);
+    };
+};
+};
